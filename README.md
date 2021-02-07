@@ -8,6 +8,14 @@ Google Chrome 81 以降では、"[Text Fragments](https://wicg.github.io/scroll-
 
 このブックマークレットは、閲覧中のWebページでテキストを選択してから実行することで、選択したテキストを Text Fragments にしつつ、その URL をツイートするために、Twitter Web の投稿画面を開きます。
 
+```
+const selectedText = getSelection().toString();
+const newUrl = new URL(location);
+newUrl.hash = `:~:text=${selectedText}`;
+const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(selectedText)}&url=${encodeURIComponent(newUrl)}`;
+window.open(twitterUrl, '_blank');
+```
+
 ## 使い方
 
 下記のブックマークレットをブラウザのブックマークツールバーなどに登録してください。閲覧中のWebページでテキストを選択後、ブックマークレットを実行します。
